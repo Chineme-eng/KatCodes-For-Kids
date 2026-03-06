@@ -573,6 +573,9 @@
           <button class="snippet-btn" onclick="loadSnippet('button')">🔘 Cool button</button>
           <button class="snippet-btn" onclick="loadSnippet('card')">🃏 Profile card</button>
           <button class="snippet-btn" onclick="loadSnippet('counter')">🔢 Counter</button>
+          <button class="snippet-btn" onclick="loadSnippet('bounce')">🏀 Bouncing Ball</button>
+          <button class="snippet-btn" onclick="loadSnippet('neon')">⚡ Neon Glow</button>
+          <button class="snippet-btn" onclick="loadSnippet('spin')">🌀 Spin Magic</button>
           <button class="snippet-btn" onclick="loadSnippet('reset')">↩️ Reset</button>
           <button class="run-btn" onclick="runCode()">Run → </button>
         </div>
@@ -986,7 +989,24 @@
   let n = 0;
   function change(v) { n += v; document.getElementById('count').textContent = n; }
 <\/script>`,
-
+      bounce: `<style>
+    body { display:flex; justify-content:center; align-items:end; min-height:80vh; margin:0; background:#87CEEB; }
+    .ball { font-size: 5rem; animation: bounce 0.5s infinite alternate ease-in; }
+    @keyframes bounce { from { transform: translateY(-200px); } to { transform: translateY(0); } }
+  </style>
+  <div class="ball">🏀</div>`,
+  neon: `<style>
+    body { display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; background:#111; font-family:sans-serif; }
+    h1 { color: #fff; font-size: 4rem; text-shadow: 0 0 10px #0fa, 0 0 20px #0fa, 0 0 40px #0fa; }
+  </style>
+  <h1>SUPER GLOW ⚡</h1>`,
+  spin: `<style>
+    body { display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:100vh; margin:0; background:#ffe6e6; font-family:sans-serif; }
+    .pet { font-size: 6rem; transition: transform 0.5s; cursor: pointer; }
+    .pet:hover { transform: rotate(360deg) scale(1.5); }
+  </style>
+  <div class="pet">🐶</div>
+  <h2>Hover over me!</h2>`, 
       reset: `<style>
   body { font-family: sans-serif; padding: 20px; }
   h1 { color: coral; }
