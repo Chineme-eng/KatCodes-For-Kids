@@ -865,7 +865,7 @@
       document.getElementById("theme-label").textContent = isDark ? "Dark" : "Light";
     }
 
-    // Load saved theme
+   // Load saved theme
     const savedTheme = localStorage.getItem("theme") || "light";
     document.documentElement.dataset.theme = savedTheme;
     if (savedTheme === "dark") {
@@ -873,53 +873,43 @@
       document.getElementById("theme-label").textContent = "Light";
     }
 
-  // ============================================================
-    // PROGRESS (Functional & Resets on Refresh)
+    // ============================================================
+    // PROGRESS & REVEAL (Functional & Resets on Refresh)
     // ============================================================
     const sectionIds = ['tools','languages','playground','roadmap','projects','darkmode','quiz','mindset','github'];
-    
-    // We initialize an empty Set so it always starts at 0% on refresh
     let seen = new Set(); 
 
-    function updateProgress(){
-      const pct = Math.round((seen.size / sectionIds.length) * 100);
+    function updateProgress() {
       const progressBar = document.getElementById('main-progress');
-      const progressText = document.getElementById('progress-pct');
+      const progressText = document.getElementById('progress-label'); // Updated to match your HTML ID
+      
+      const pct = Math.round((seen.size / sectionIds.length) * 100);
       
       if (progressBar) progressBar.style.width = pct + '%';
-      if (progressText) progressText.textContent = pct + '%';
+      if (progressText) progressText.textContent = pct + '% complete';
     }
 
-    const po = new IntersectionObserver(entries => {
+    // Unified Observer for both Progress and Scroll Reveal
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        // If a section comes into view and it's in our list, add it to progress
-        if (e.isIntersecting && sectionIds.includes(e.target.id)) {
-          seen.add(e.target.id);
-          updateProgress();
-        }
-      });
-    }, { threshold: 0.25 }); // Triggers when 25% of the section is visible
+        if (e.isIntersecting) {
+          // 1. Reveal the section
+          e.target.classList.add('visible');
 
-    // Start observing all sections that have IDs
-    document.querySelectorAll('section[id]').forEach(s => po.observe(s));
-    
-    // Initial call to set to 0%
-    updateProgress();
+          // 2. Update progress if it's a main section
+          if (sectionIds.includes(e.target.id)) {
+            seen.add(e.target.id);
+            updateProgress();
           }
         }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.1 });
 
-    document.querySelectorAll("section[id]").forEach(s => sectionObserver.observe(s));
+    // Start watching all sections and revealable elements
+    document.querySelectorAll('section[id], .reveal').forEach(el => observer.observe(el));
+    
+    // Reset to 0% on load
     updateProgress();
-    setTimeout(() => { document.getElementById("main-progress").style.width = "0%"; }, 100);
-    setTimeout(updateProgress, 300);
-
-    // ===== SCROLL REVEAL =====
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
-    }, { threshold: 0.08 });
-    document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
 
     // ===== LANGUAGE SWITCHER =====
     function switchLang(lang) {
