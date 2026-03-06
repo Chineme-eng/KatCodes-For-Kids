@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Code Your Future 🚀 — Beginner's Guide to Coding</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* ===== CSS VARIABLES — LIGHT & DARK MODE ===== */
+    :root {
+      --bg: #fffaf3;
+      --bg2: #fff4e0;
+      --bg3: #ffe8c0;
+      --card: #ffffff;
+      --card-border: #ffd580;
+      --text: #2d2013;
+      --text2: #7a5c2e;
+      --accent: #ff8c00;
+      --accent2: #ff5f6d;
+      --accent3: #43c59e;
+      --accent4: #6c63ff;
+      --accent5: #f7c948;
+      --code-bg: #1e1b2e;
+      --code-text: #e0d7ff;
+      --shadow: rgba(255,140,0,0.13);
+      --nav-bg: rgba(255,250,243,0.92);
+      --progress-bg: #ffd580;
+      --tag-bg: #fff4d6;
+      --tag-text: #b87c00;
+      --btn-text: #fff;
+      --hero-text: #2d2013;
+      --roadmap-line: #ffd580;
+      --mode-icon: "🌙";
+      --transition: 0.35s cubic-bezier(.4,0,.2,1);
+    }
+    [data-theme="dark"] {
+      --bg: #16131f;
+      --bg2: #1e1a2e;
+      --bg3: #261f3a;
+      --card: #231d35;
+      --card-border: #6c63ff;
+      --text: #f0eaff;
+      --text2: #b8aad4;
+      --accent: #f7c948;
+      --accent2: #ff5f6d;
+      --accent3: #43c59e;
+      --accent4: #a78bfa;
+      --accent5: #f7c948;
+      --code-bg: #0d0b18;
+      --code-text: #c9f0e0;
+      --shadow: rgba(108,99,255,0.18);
+      --nav-bg: rgba(22,19,31,0.95);
+      --progress-bg: #6c63ff;
+      --tag-bg: #261f3a;
+      --tag-text: #a78bfa;
+      --btn-text: #16131f;
+      --hero-text: #f0eaff;
+      --roadmap-line: #6c63ff;
+      --mode-icon: "☀️";
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 17px; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background var(--transition), color var(--transition);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ===== ANIMATED BACKGROUND ===== */
+    .bg-blobs {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.18;
+      animation: blobFloat 12s ease-in-out infinite alternate;
+    }
+    [data-theme="dark"] .blob { opacity: 0.13; }
+    .blob1 { width: 500px; height: 500px; background: #ff8c00; top: -100px; left: -150px; animation-delay: 0s; }
+    .blob2 { width: 400px; height: 400px; background: #6c63ff; top: 30vh; right: -100px; animation-delay: 3s; }
+    .blob3 { width: 350px; height: 350px; background: #43c59e; bottom: 5vh; left: 20vw; animation-delay: 6s; }
+    @keyframes blobFloat {
+      0% { transform: translate(0,0) scale(1); }
+      100% { transform: translate(30px,40px) scale(1.08); }
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--card-border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.7rem 2.5rem;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .nav-logo { font-size: 1.4rem; font-weight: 900; color: var(--accent); letter-spacing: -1px; }
+    .nav-logo span { color: var(--accent4); }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; list-style: none; }
+    .nav-links a {
+      color: var(--text2); font-weight: 700; font-size: 0.92rem;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .theme-toggle {
+      background: var(--bg3); border: 2px solid var(--card-border);
+      border-radius: 50px; padding: 0.32rem 1rem;
+      cursor: pointer; font-size: 1.1rem; font-weight: 800;
+      color: var(--text); transition: all 0.2s;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .theme-toggle:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* ===== MAIN LAYOUT ===== */
+    main { position: relative; z-index: 1; }
+    section { padding: 5rem 1.5rem; max-width: 900px; margin: 0 auto; }
+    h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); font-weight: 900; line-height: 1.1; }
+    h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800; margin-bottom: 1.5rem; }
+    h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+    p { line-height: 1.8; color: var(--text2); }
+    a { color: var(--accent); }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 95vh; display: flex; flex-direction: column;
+      justify-content: center; padding-top: 6rem;
+      max-width: 900px; margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--tag-bg); color: var(--tag-text);
+      border: 1.5px solid var(--card-border);
+      padding: 0.3rem 1rem; border-radius: 50px;
+      font-size: 0.85rem; font-weight: 800; margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s both;
+    }
+    .hero-title { color: var(--hero-text); animation: fadeUp 0.7s 0.1s both; }
+    .hero-title .highlight {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.2rem; margin: 1.5rem 0 2.5rem; max-width: 580px;
+      animation: fadeUp 0.7s 0.2s both;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.7s 0.3s both; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.8rem; border-radius: 50px;
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem;
+      border: none; cursor: pointer; transition: all 0.2s; text-decoration: none;
+    }
+    .btn-primary { background: var(--accent); color: var(--btn-text); box-shadow: 0 4px 20px var(--shadow); }
+    .btn-primary:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 8px 28px var(--shadow); }
+    .btn-secondary { background: var(--card); color: var(--text); border: 2px solid var(--card-border); }
+    .btn-secondary:hover { background: var(--accent4); color: #fff; border-color: var(--accent4); transform: translateY(-2px); }
+    .hero-progress { margin-top: 4rem; animation: fadeUp 0.7s 0.45s both; }
+    .hero-progress p { font-weight: 700; font-size: 0.9rem; margin-bottom: 0.6rem; }
+    .progress-bar { height: 8px; background: var(--bg3); border-radius: 10px; overflow: hidden; }
+    .progress-fill {
+      height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 10px; transition: width 1.5s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: var(--card);
+      border: 2px solid var(--card-border);
+      border-radius: 20px;
+      padding: 1.8rem;
+      box-shadow: 0 4px 24px var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s, background var(--transition), border-color var(--transition);
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px var(--shadow); }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
+
+    /* ===== SECTION HEADERS ===== */
+    .section-label {
+      display: inline-block; background: var(--tag-bg); color: var(--tag-text);
+      padding: 0.2rem 0.9rem; border-radius: 50px; font-size: 0.82rem;
+      font-weight: 800; margin-bottom: 0.7rem; letter-spacing: 0.05em;
+    }
+
+    /* ===== TOOLS SECTION ===== */
+    .tool-icon { font-size: 2rem; margin-bottom: 0.7rem; }
+    .tool-tag {
+      display: inline-block; background: var(--tag-bg); color: var(--tag-text);
+      padding: 0.15rem 0.6rem; border-radius: 50px; font-size: 0.75rem;
+      font-weight: 700; margin-bottom: 0.5rem;
+    }
+    .tool-link {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      margin-top: 0.8rem; font-weight: 800; font-size: 0.9rem;
+      color: var(--accent4); text-decoration: none;
+    }
+    .tool-link:hover { text-decoration: underline; }
+
+    /* ===== CODE PLAYGROUND ===== */
+    #playground { background: var(--bg2); border-radius: 32px; max-width: 960px; margin: 0 auto; }
+    .playground-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media(max-width:680px) { .playground-wrap { grid-template-columns: 1fr; } }
+    .editor-label {
+      font-size: 0.82rem; font-weight: 800; color: var(--text2);
+      margin-bottom: 0.5rem; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .code-editor {
+      background: var(--code-bg);
+      color: var(--code-text);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88rem;
+      border: 2px solid #333;
+      border-radius: 14px;
+      padding: 1.2rem;
+      width: 100%;
+      min-height: 200px;
+      resize: vertical;
+      outline: none;
+      line-height: 1.7;
+      transition: border-color 0.2s;
+    }
+    .code-editor:focus { border-color: var(--accent); }
+    .preview-frame {
+      background: #fff;
+      border: 2px solid var(--card-border);
+      border-radius: 14px;
+      min-height: 200px;
+      overflow: auto;
+      padding: 1rem;
+    }
+    .playground-btns { display: flex; gap: 0.7rem; margin-top: 1rem; flex-wrap: wrap; }
+    .snippet-btn {
+      background: var(--tag-bg); color: var(--tag-text); border: 1.5px solid var(--card-border);
+      border-radius: 50px; padding: 0.3rem 0.9rem; font-weight: 700;
+      font-size: 0.82rem; cursor: pointer; font-family: 'Nunito', sans-serif;
+      transition: all 0.15s;
+    }
+    .snippet-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .run-btn {
+      background: var(--accent3); color: #fff; border: none;
+      border-radius: 50px; padding: 0.5rem 1.4rem; font-weight: 800;
+      font-size: 0.95rem; cursor: pointer; font-family: 'Nunito', sans-serif;
+      transition: all 0.2s;
+    }
+    .run-btn:hover { transform: scale(1.05); background: #34a87d; }
+
+    /* ===== LANGUAGE SWITCHER ===== */
+    .lang-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+    .lang-tab {
+      background: var(--tag-bg); color: var(--tag-text);
+      border: 1.5px solid var(--card-border); border-radius: 50px;
+      padding: 0.3rem 1rem; font-weight: 800; font-size: 0.88rem;
+      cursor: pointer; font-family: 'Nunito', sans-serif; transition: all 0.15s;
+    }
+    .lang-tab.active, .lang-tab:hover { background: var(--accent4); color: #fff; border-color: var(--accent4); }
+    .lang-example { display: none; }
+    .lang-example.active { display: block; }
+    pre {
+      background: var(--code-bg); color: var(--code-text);
+      font-family: 'Fira Code', monospace; font-size: 0.88rem;
+      border-radius: 14px; padding: 1.4rem; overflow-x: auto;
+      line-height: 1.7; border: 2px solid #2a2540;
+    }
+    .code-comment { color: #7a7099; }
+    .code-kw { color: #c792ea; }
+    .code-str { color: #c3e88d; }
+    .code-fn { color: #82aaff; }
+    .code-num { color: #f78c6c; }
+    .code-type { color: #f7c948; }
+
+    /* ===== ROADMAP ===== */
+    .roadmap { position: relative; padding-left: 3rem; }
+    .roadmap::before {
+      content: ''; position: absolute; left: 1rem; top: 0; bottom: 0;
+      width: 3px; background: var(--roadmap-line); border-radius: 3px;
+    }
+    .roadmap-step {
+      position: relative; margin-bottom: 2rem;
+      animation: fadeUp 0.5s both;
+    }
+    .roadmap-dot {
+      position: absolute; left: -2.35rem; top: 0.15rem;
+      width: 2rem; height: 2rem; border-radius: 50%;
+      background: var(--accent); color: #fff; font-weight: 900;
+      font-size: 0.9rem; display: flex; align-items: center; justify-content: center;
+      border: 3px solid var(--bg); box-shadow: 0 0 0 3px var(--accent);
+      transition: background var(--transition);
+    }
+    .roadmap-step:hover .roadmap-dot { background: var(--accent4); box-shadow: 0 0 0 3px var(--accent4); }
+    .roadmap-step h3 { margin-bottom: 0.3rem; font-size: 1.05rem; }
+
+    /* ===== PROJECTS ===== */
+    .project-emoji { font-size: 2.5rem; margin-bottom: 0.8rem; }
+    .difficulty {
+      display: inline-block; padding: 0.15rem 0.6rem;
+      border-radius: 50px; font-size: 0.75rem; font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .easy { background: #d4f7e8; color: #1a7a4a; }
+    .medium { background: #fff0d4; color: #a06000; }
+    [data-theme="dark"] .easy { background: #0d3022; color: #43c59e; }
+    [data-theme="dark"] .medium { background: #2e1f00; color: #f7c948; }
+
+    /* ===== DARK MODE EXPLAINER ===== */
+    .dm-step {
+      display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.5rem;
+    }
+    .dm-num {
+      min-width: 2rem; height: 2rem; background: var(--accent4);
+      color: #fff; border-radius: 50%; font-weight: 900; display: flex;
+      align-items: center; justify-content: center; font-size: 0.9rem; margin-top: 0.1rem;
+    }
+
+    /* ===== QUIZ ===== */
+    .quiz-question { font-size: 1.1rem; font-weight: 800; margin-bottom: 1rem; }
+    .quiz-options { display: flex; flex-direction: column; gap: 0.7rem; }
+    .quiz-opt {
+      background: var(--bg2); border: 2px solid var(--card-border);
+      border-radius: 12px; padding: 0.7rem 1.1rem; cursor: pointer;
+      font-weight: 700; font-size: 0.95rem; transition: all 0.15s;
+      color: var(--text); font-family: 'Nunito', sans-serif; text-align: left;
+    }
+    .quiz-opt:hover { background: var(--accent4); color: #fff; border-color: var(--accent4); }
+    .quiz-opt.correct { background: #d4f7e8; border-color: #43c59e; color: #1a7a4a; }
+    .quiz-opt.wrong { background: #ffd6d6; border-color: #ff5f6d; color: #a0001a; }
+    [data-theme="dark"] .quiz-opt.correct { background: #0d3022; color: #43c59e; border-color: #43c59e; }
+    [data-theme="dark"] .quiz-opt.wrong { background: #2e0010; color: #ff5f6d; border-color: #ff5f6d; }
+    .quiz-feedback { margin-top: 1rem; font-weight: 800; font-size: 1rem; min-height: 1.5rem; }
+    .quiz-next { margin-top: 1rem; }
+
+    /* ===== MINDSET SECTION ===== */
+    .quote-card {
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.5rem;
+      background: var(--bg2);
+      border-radius: 0 14px 14px 0;
+      margin-bottom: 1rem;
+      font-style: italic;
+      font-size: 1.05rem;
+      transition: background var(--transition);
+    }
+    .quote-author { font-weight: 800; font-style: normal; color: var(--accent); font-size: 0.9rem; margin-top: 0.4rem; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center; padding: 3rem 1.5rem 2rem;
+      color: var(--text2); font-size: 0.92rem; border-top: 2px solid var(--card-border);
+    }
+    footer strong { color: var(--accent); }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s, transform 0.6s; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ===== MISC ===== */
+    .emoji-big { font-size: 2rem; }
+    .text-accent { color: var(--accent); }
+    .text-accent4 { color: var(--accent4); }
+    .mt1 { margin-top: 1rem; }
+    .mt2 { margin-top: 2rem; }
+    @media(max-width:560px) {
+      nav { padding: 0.7rem 1rem; }
+      .nav-links { display: none; }
+    }
+
+    /* ===== CONFETTI ===== */
+    #confetti-canvas {
+      position: fixed; inset: 0; pointer-events: none; z-index: 999;
+    }
+
+    /* GITHUB STEPS */
+    .gh-step {
+      display: flex; gap: 1rem; align-items: flex-start;
+      background: var(--card); border: 2px solid var(--card-border);
+      border-radius: 16px; padding: 1.2rem 1.5rem; margin-bottom: 1rem;
+    }
+    .gh-num {
+      min-width: 2.2rem; height: 2.2rem; background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; border-radius: 50%; font-weight: 900;
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .gh-step code {
+      background: var(--bg3); padding: 0.15rem 0.5rem; border-radius: 6px;
+      font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--accent2);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti-canvas"></canvas>
+  <div class="bg-blobs" aria-hidden="true">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Code<span>Your</span>Future 🚀</div>
+    <ul class="nav-links">
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#playground">Try It</a></li>
+      <li><a href="#roadmap">Roadmap</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#quiz">Quiz</a></li>
+      <li><a href="#github">GitHub</a></li>
+    </ul>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode">
+      <span id="theme-icon">🌙</span> <span id="theme-label">Dark</span>
+    </button>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-badge">✨ You can do this — seriously.</div>
+      <h1 class="hero-title">
+        Learning to code is<br><span class="highlight">easier than you think.</span>
+      </h1>
+      <p class="hero-sub">
+        No computer science degree. No expensive courses. No experience needed.
+        Just curiosity, a laptop, and this guide. Let's build something amazing — together. 💛
+      </p>
+      <div class="hero-btns">
+        <a href="#tools" class="btn btn-primary">🛠️ Get Free Tools</a>
+        <a href="#playground" class="btn btn-secondary">▶️ Try Coding Now</a>
+      </div>
+      <div class="hero-progress">
+        <p>Your learning adventure: <span id="progress-label">0% complete</span></p>
+        <div class="progress-bar"><div class="progress-fill" id="main-progress"></div></div>
+      </div>
+    </section>
+
+    <!-- TOOLS -->
+    <section id="tools" class="reveal">
+      <div class="section-label">🛠️ FREE TOOLS</div>
+      <h2>Everything you need — and it's all free.</h2>
+      <p>Before writing a single line of code, you need a few tools. These are the same ones professionals use. Don't worry — they're free and beginner-friendly!</p>
+      <div class="grid-2 mt2">
+        <div class="card">
+          <div class="tool-icon">⌨️</div>
+          <div class="tool-tag">Code Editor</div>
+          <h3>VS Code</h3>
+          <p>The most popular code editor on the planet. It highlights your code, catches errors, and has tons of helpful extensions.</p>
+          <a href="https://code.visualstudio.com" target="_blank" class="tool-link">Download free →</a>
+        </div>
+        <div class="card">
+          <div class="tool-icon">🐙</div>
+          <div class="tool-tag">Version Control + Hosting</div>
+          <h3>GitHub</h3>
+          <p>Save your code online, share it with the world, and host your websites completely free with GitHub Pages.</p>
+          <a href="https://github.com" target="_blank" class="tool-link">Sign up free →</a>
+        </div>
+        <div class="card">
+          <div class="tool-icon">🌐</div>
+          <div class="tool-tag">Learning Platform</div>
+          <h3>freeCodeCamp</h3>
+          <p>Thousands of hours of free, structured coding lessons — from HTML basics to full web apps. No credit card ever.</p>
+          <a href="https://www.freecodecamp.org" target="_blank" class="tool-link">Start learning →</a>
+        </div>
+        <div class="card">
+          <div class="tool-icon">🎮</div>
+          <div class="tool-tag">Practice</div>
+          <h3>CodePen</h3>
+          <p>A playground in your browser. Write HTML, CSS, and JavaScript and see results instantly — no setup needed.</p>
+          <a href="https://codepen.io" target="_blank" class="tool-link">Try in browser →</a>
+        </div>
+        <div class="card">
+          <div class="tool-icon">📺</div>
+          <div class="tool-tag">Video Tutorials</div>
+          <h3>The Odin Project</h3>
+          <p>A free, open-source, self-paced curriculum that takes you from zero to full-stack developer. Very beginner-friendly!</p>
+          <a href="https://www.theodinproject.com" target="_blank" class="tool-link">Start the path →</a>
+        </div>
+        <div class="card">
+          <div class="tool-icon">🤖</div>
+          <div class="tool-tag">AI Helper</div>
+          <h3>ChatGPT / Claude</h3>
+          <p>Stuck? Ask an AI! They're incredible for explaining concepts, debugging code, and suggesting next steps. Free tiers available.</p>
+          <a href="https://chat.openai.com" target="_blank" class="tool-link">Try ChatGPT →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- LANGUAGE SWITCHER -->
+    <section id="languages" class="reveal">
+      <div class="section-label">👅 LANGUAGES</div>
+      <h2>What language should you learn first?</h2>
+      <p>Every programming language is a tool. Here's what the most popular ones look like — all doing the same thing: printing "Hello, World!"</p>
+      <div class="lang-tabs mt2">
+        <button class="lang-tab active" onclick="switchLang('html')">HTML</button>
+        <button class="lang-tab" onclick="switchLang('css')">CSS</button>
+        <button class="lang-tab" onclick="switchLang('js')">JavaScript</button>
+        <button class="lang-tab" onclick="switchLang('python')">Python</button>
+        <button class="lang-tab" onclick="switchLang('swift')">Swift</button>
+      </div>
+      <div id="lang-html" class="lang-example active card">
+        <p style="margin-bottom:0.8rem;font-weight:700;">🌐 HTML — The skeleton of every website. It gives pages structure.</p>
+        <pre><span class="code-comment">&lt;!-- This is an HTML comment --&gt;</span>
+<span class="code-kw">&lt;h1&gt;</span>Hello, World!<span class="code-kw">&lt;/h1&gt;</span>
+<span class="code-kw">&lt;p&gt;</span>I'm learning to code!<span class="code-kw">&lt;/p&gt;</span>
+<span class="code-kw">&lt;button&gt;</span>Click me<span class="code-kw">&lt;/button&gt;</span></pre>
+        <p class="mt1">🏁 <strong>Best for:</strong> Anyone who wants to build websites. Start here if you're not sure!</p>
+      </div>
+      <div id="lang-css" class="lang-example card">
+        <p style="margin-bottom:0.8rem;font-weight:700;">🎨 CSS — The paint and decorator. It makes things look beautiful.</p>
+        <pre><span class="code-comment">/* Change the page background color */</span>
+<span class="code-fn">body</span> {
+  <span class="code-kw">background-color</span>: <span class="code-str">coral</span>;
+  <span class="code-kw">font-family</span>: <span class="code-str">sans-serif</span>;
+  <span class="code-kw">color</span>: <span class="code-str">white</span>;
+}
+
+<span class="code-fn">h1</span> {
+  <span class="code-kw">font-size</span>: <span class="code-num">48px</span>;
+}</pre>
+        <p class="mt1">🏁 <strong>Best for:</strong> People who care about design and making things look great.</p>
+      </div>
+      <div id="lang-js" class="lang-example card">
+        <p style="margin-bottom:0.8rem;font-weight:700;">⚡ JavaScript — The brain. Makes websites interactive and alive.</p>
+        <pre><span class="code-comment">// Show a greeting</span>
+<span class="code-kw">let</span> name = <span class="code-str">"World"</span>;
+<span class="code-fn">console</span>.log(<span class="code-str">`Hello, ${name}!`</span>);
+
+<span class="code-comment">// React to a button click</span>
+<span class="code-fn">document</span>.querySelector(<span class="code-str">"button"</span>)
+  .addEventListener(<span class="code-str">"click"</span>, () =&gt; {
+    <span class="code-fn">alert</span>(<span class="code-str">"You clicked me! 🎉"</span>);
+  });</pre>
+        <p class="mt1">🏁 <strong>Best for:</strong> Web development, games, apps — incredibly versatile!</p>
+      </div>
+      <div id="lang-python" class="lang-example card">
+        <p style="margin-bottom:0.8rem;font-weight:700;">🐍 Python — Super readable. Great for beginners and professionals alike.</p>
+        <pre><span class="code-comment"># Print a greeting</span>
+<span class="code-kw">print</span>(<span class="code-str">"Hello, World!"</span>)
+
+<span class="code-comment"># A simple function</span>
+<span class="code-kw">def</span> <span class="code-fn">greet</span>(name):
+    <span class="code-kw">return</span> <span class="code-str">f"Hello, {name}! 👋"</span>
+
+<span class="code-kw">print</span>(<span class="code-fn">greet</span>(<span class="code-str">"World"</span>))</pre>
+        <p class="mt1">🏁 <strong>Best for:</strong> Data science, AI, automation, beginners — reads almost like English!</p>
+      </div>
+      <div id="lang-swift" class="lang-example card">
+        <p style="margin-bottom:0.8rem;font-weight:700;">🍎 Swift — Apple's language for iPhone and Mac apps.</p>
+        <pre><span class="code-comment">// Swift - used for iOS apps</span>
+<span class="code-kw">import</span> Foundation
+
+<span class="code-kw">let</span> greeting: <span class="code-type">String</span> = <span class="code-str">"Hello, World!"</span>
+<span class="code-fn">print</span>(greeting)
+
+<span class="code-kw">func</span> <span class="code-fn">greet</span>(name: <span class="code-type">String</span>) -&gt; <span class="code-type">String</span> {
+    <span class="code-kw">return</span> <span class="code-str">"Hello, \(name)! 🍎"</span>
+}</pre>
+        <p class="mt1">🏁 <strong>Best for:</strong> Building iPhone or Mac apps. You'll need a Mac to get started.</p>
+      </div>
+    </section>
+
+    <!-- CODE PLAYGROUND -->
+    <section id="playground" class="reveal" style="max-width: 960px;">
+      <div class="section-label">▶️ INTERACTIVE</div>
+      <h2>Write real code. See it live. Right here.</h2>
+      <p>This is a real HTML editor. Type anything — change colors, text, add emojis. Click <strong>Run →</strong> to see your changes!</p>
+      <div class="mt2">
+        <p style="font-weight:700; margin-bottom:0.6rem;">Quick examples to try:</p>
+        <div class="playground-btns">
+          <button class="snippet-btn" onclick="loadSnippet('rainbow')">🌈 Rainbow text</button>
+          <button class="snippet-btn" onclick="loadSnippet('button')">🔘 Cool button</button>
+          <button class="snippet-btn" onclick="loadSnippet('card')">🃏 Profile card</button>
+          <button class="snippet-btn" onclick="loadSnippet('counter')">🔢 Counter</button>
+          <button class="snippet-btn" onclick="loadSnippet('reset')">↩️ Reset</button>
+          <button class="run-btn" onclick="runCode()">Run → </button>
+        </div>
+      </div>
+      <div class="playground-wrap mt2">
+        <div>
+          <div class="editor-label">✏️ YOUR CODE</div>
+          <textarea class="code-editor" id="code-editor" spellcheck="false">&lt;!-- ✏️ Edit me! --&gt;
+&lt;style&gt;
+  body { font-family: sans-serif; padding: 20px; }
+  h1 { color: coral; }
+&lt;/style&gt;
+
+&lt;h1&gt;Hello, World! 🌍&lt;/h1&gt;
+&lt;p&gt;Change this text and click Run →&lt;/p&gt;</textarea>
+        </div>
+        <div>
+          <div class="editor-label">👁️ LIVE PREVIEW</div>
+          <iframe id="preview-frame" class="preview-frame" title="Preview"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap" class="reveal">
+      <div class="section-label">🗺️ ROADMAP</div>
+      <h2>Your path from zero to hero.</h2>
+      <p>Don't try to learn everything at once. Follow this order and you'll build confidence every step of the way.</p>
+      <div class="roadmap mt2">
+        <div class="roadmap-step reveal">
+          <div class="roadmap-dot">1</div>
+          <div class="card">
+            <h3>🌐 HTML Basics (Week 1–2)</h3>
+            <p>Learn what tags are, how pages are structured, and build your first webpage. Takes about 5–10 hours total.</p>
+          </div>
+        </div>
+        <div class="roadmap-step reveal">
+          <div class="roadmap-dot">2</div>
+          <div class="card">
+            <h3>🎨 CSS Fundamentals (Week 2–4)</h3>
+            <p>Make your page look good! Colors, fonts, spacing, flexbox for layout. This is where things start feeling real.</p>
+          </div>
+        </div>
+        <div class="roadmap-step reveal">
+          <div class="roadmap-dot">3</div>
+          <div class="card">
+            <h3>⚡ JavaScript Basics (Month 2)</h3>
+            <p>Add interactivity — buttons, forms, animations. This is the "magic" language that makes sites actually work.</p>
+          </div>
+        </div>
+        <div class="roadmap-step reveal">
+          <div class="roadmap-dot">4</div>
+          <div class="card">
+            <h3>🐙 Git & GitHub (Month 2–3)</h3>
+            <p>Save your work, undo mistakes, and share your projects. GitHub Pages lets you host real websites — free!</p>
+          </div>
+        </div>
+        <div class="roadmap-step reveal">
+          <div class="roadmap-dot">5</div>
+          <div class="card">
+            <h3>🚀 Build Projects! (Month 3+)</h3>
+            <p>This is where learning explodes. Build things you care about. Show them off. Get feedback. Repeat!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="reveal">
+      <div class="section-label">💡 FIRST PROJECTS</div>
+      <h2>Fun things to build as a beginner.</h2>
+      <p>The best way to learn is by making something. Here are ideas that are achievable and genuinely fun to show people!</p>
+      <div class="grid-3 mt2">
+        <div class="card">
+          <div class="project-emoji">🎴</div>
+          <div class="difficulty easy">Easy</div>
+          <h3>Personal Card</h3>
+          <p>A simple page with your name, a photo, and fun facts about you. Perfect first HTML + CSS project!</p>
+        </div>
+        <div class="card">
+          <div class="project-emoji">🌦️</div>
+          <div class="difficulty easy">Easy</div>
+          <h3>Random Quote Generator</h3>
+          <p>Click a button, get an inspiring quote. Learn JavaScript arrays, click events, and DOM basics.</p>
+        </div>
+        <div class="card">
+          <div class="project-emoji">⏱️</div>
+          <div class="difficulty easy">Easy</div>
+          <h3>Countdown Timer</h3>
+          <p>A timer counting down to your birthday, a trip, or any event. JavaScript timing functions!</p>
+        </div>
+        <div class="card">
+          <div class="project-emoji">🎮</div>
+          <div class="difficulty medium">Medium</div>
+          <h3>Rock Paper Scissors</h3>
+          <p>Classic game vs. the computer! Teaches conditionals, randomness, and game logic.</p>
+        </div>
+        <div class="card">
+          <div class="project-emoji">📝</div>
+          <div class="difficulty medium">Medium</div>
+          <h3>To-Do List App</h3>
+          <p>Add, complete, and delete tasks. Teaches dynamic HTML creation and local data storage.</p>
+        </div>
+        <div class="card">
+          <div class="project-emoji">🌐</div>
+          <div class="difficulty medium">Medium</div>
+          <h3>Portfolio Site</h3>
+          <p>A real website with your projects, about me, and contact info. The classic developer milestone!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DARK MODE EXPLAINER -->
+    <section id="darkmode" class="reveal">
+      <div class="section-label">🌙 HOW THIS PAGE WORKS</div>
+      <h2>How the dark/light mode on <em>this</em> page works.</h2>
+      <p>Want to add dark mode to your own site? Here's exactly how this page does it — it's simpler than you think!</p>
+      <div class="mt2">
+        <div class="dm-step">
+          <div class="dm-num">1</div>
+          <div>
+            <h3>CSS Variables for colors</h3>
+            <p>Instead of writing <code style="font-family:'Fira Code';background:var(--bg3);padding:0.1rem 0.4rem;border-radius:4px;">color: orange</code> everywhere, we use variables like <code style="font-family:'Fira Code';background:var(--bg3);padding:0.1rem 0.4rem;border-radius:4px;">--accent: #ff8c00</code> in <code style="font-family:'Fira Code';background:var(--bg3);padding:0.1rem 0.4rem;border-radius:4px;">:root {}</code>. Then for dark mode, we just redefine those same variables.</p>
+          </div>
+        </div>
+        <div class="dm-step">
+          <div class="dm-num">2</div>
+          <div>
+            <h3>A data attribute on <code style="font-family:'Fira Code';">&lt;html&gt;</code></h3>
+            <p>The HTML element gets <code style="font-family:'Fira Code';background:var(--bg3);padding:0.1rem 0.4rem;border-radius:4px;">data-theme="light"</code> or <code style="font-family:'Fira Code';background:var(--bg3);padding:0.1rem 0.4rem;border-radius:4px;">data-theme="dark"</code>. CSS uses <code style="font-family:'Fira Code';background:var(--bg3);padding:0.1rem 0.4rem;border-radius:4px;">[data-theme="dark"] { }</code> to override the colors.</p>
+          </div>
+        </div>
+        <div class="dm-step">
+          <div class="dm-num">3</div>
+          <div>
+            <h3>One tiny JavaScript function</h3>
+            <p>A single function toggles the attribute: <code style="font-family:'Fira Code';background:var(--bg3);padding:0.1rem 0.4rem;border-radius:4px;">document.documentElement.dataset.theme = "dark"</code>. That's it! Smooth transitions are handled by CSS.</p>
+          </div>
+        </div>
+        <div class="dm-step">
+          <div class="dm-num">4</div>
+          <div>
+            <h3>Remember the preference</h3>
+            <p>We save the user's choice with <code style="font-family:'Fira Code';background:var(--bg3);padding:0.1rem 0.4rem;border-radius:4px;">localStorage.setItem("theme", "dark")</code> so it persists on page reload.</p>
+          </div>
+        </div>
+      </div>
+      <pre class="mt2"><span class="code-comment">/* Step 1: Define colors as variables */</span>
+<span class="code-fn">:root</span> {
+  <span class="code-kw">--bg</span>: <span class="code-num">#fffaf3</span>;
+  <span class="code-kw">--text</span>: <span class="code-num">#2d2013</span>;
+  <span class="code-kw">--accent</span>: <span class="code-num">#ff8c00</span>;
+}
+
+<span class="code-comment">/* Step 2: Override for dark mode */</span>
+<span class="code-fn">[data-theme="dark"]</span> {
+  <span class="code-kw">--bg</span>: <span class="code-num">#16131f</span>;
+  <span class="code-kw">--text</span>: <span class="code-num">#f0eaff</span>;
+  <span class="code-kw">--accent</span>: <span class="code-num">#f7c948</span>;
+}
+
+<span class="code-comment">/* Step 3: Use variables everywhere */</span>
+<span class="code-fn">body</span> { <span class="code-kw">background</span>: <span class="code-str">var(--bg)</span>; <span class="code-kw">color</span>: <span class="code-str">var(--text)</span>; }
+
+<span class="code-comment">/* Step 4: Smooth transitions */</span>
+<span class="code-fn">body</span> { <span class="code-kw">transition</span>: <span class="code-str">background 0.35s, color 0.35s</span>; }</pre>
+
+      <pre class="mt2"><span class="code-comment">// JavaScript toggle function</span>
+<span class="code-kw">function</span> <span class="code-fn">toggleTheme</span>() {
+  <span class="code-kw">const</span> html = document.documentElement;
+  <span class="code-kw">const</span> isDark = html.dataset.theme === <span class="code-str">"dark"</span>;
+  html.dataset.theme = isDark ? <span class="code-str">"light"</span> : <span class="code-str">"dark"</span>;
+  localStorage.setItem(<span class="code-str">"theme"</span>, html.dataset.theme);
+}</pre>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="reveal">
+      <div class="section-label">🎯 QUIZ</div>
+      <h2>Test your knowledge!</h2>
+      <p>Answer 5 quick questions. No pressure — you can retake it as many times as you want!</p>
+      <div class="card mt2" id="quiz-box">
+        <div class="quiz-question" id="quiz-q"></div>
+        <div class="quiz-options" id="quiz-opts"></div>
+        <div class="quiz-feedback" id="quiz-feedback"></div>
+        <div class="quiz-next">
+          <button class="btn btn-primary" id="quiz-next-btn" onclick="nextQuestion()" style="display:none;">Next Question →</button>
+          <button class="btn btn-primary" id="quiz-restart-btn" onclick="restartQuiz()" style="display:none;">🔄 Try Again</button>
+        </div>
+        <div style="margin-top:1rem; color: var(--text2); font-size:0.85rem;">
+          Question <span id="quiz-num">1</span> of 5 &nbsp;|&nbsp; Score: <span id="quiz-score">0</span>/5
+        </div>
+      </div>
+    </section>
+
+    <!-- MINDSET -->
+    <section id="mindset" class="reveal">
+      <div class="section-label">💛 MINDSET</div>
+      <h2>The secret ingredient: your mindset.</h2>
+      <p>Technical skills are learnable. Your attitude will determine everything. Here's what the best coders believe:</p>
+      <div class="mt2">
+        <div class="quote-card">
+          "Everyone is a beginner at the start. The only difference between someone who can code and someone who can't is that one of them kept going."
+          <div class="quote-author">— Every experienced developer, ever</div>
+        </div>
+        <div class="quote-card">
+          "Getting stuck is not failure. It means you're at the edge of what you know — which is exactly where learning happens."
+          <div class="quote-author">— Growth mindset 101</div>
+        </div>
+        <div class="quote-card">
+          "You don't need to understand everything. Copy it, run it, break it, fix it. That's how real coders work."
+          <div class="quote-author">— Practical advice from Stack Overflow veterans</div>
+        </div>
+      </div>
+      <div class="grid-3 mt2">
+        <div class="card" style="text-align:center;">
+          <div class="emoji-big">🐛</div>
+          <h3>Bugs are normal</h3>
+          <p>Even senior engineers have bugs. Fixing them is literally the job. It gets satisfying!</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="emoji-big">🔍</div>
+          <h3>Google everything</h3>
+          <p>Real developers Google things constantly. It's not cheating — it's being smart.</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="emoji-big">🏗️</div>
+          <h3>Build > watch</h3>
+          <p>Watching tutorials feels productive, but building things is 10x more effective for learning.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GITHUB PUBLISHING GUIDE -->
+    <section id="github" class="reveal">
+      <div class="section-label">🐙 GITHUB PAGES</div>
+      <h2>How to publish this page (and your own!) for free.</h2>
+      <p>GitHub Pages hosts static websites completely free. Here's the step-by-step from scratch:</p>
+      <div class="mt2">
+        <div class="gh-step">
+          <div class="gh-num">1</div>
+          <div>
+            <h3>Create a GitHub account</h3>
+            <p>Go to <a href="https://github.com" target="_blank">github.com</a> → click "Sign up" → it's free. Use a professional username — it'll be in your URL!</p>
+          </div>
+        </div>
+        <div class="gh-step">
+          <div class="gh-num">2</div>
+          <div>
+            <h3>Create a new repository</h3>
+            <p>Click the <strong>+</strong> icon → "New repository" → name it <code>my-coding-guide</code> → check "Add a README" → click "Create repository".</p>
+          </div>
+        </div>
+        <div class="gh-step">
+          <div class="gh-num">3</div>
+          <div>
+            <h3>Upload your index.html</h3>
+            <p>In your new repo, click "Add file" → "Upload files" → drag your <code>index.html</code> file in → scroll down → click "Commit changes".</p>
+          </div>
+        </div>
+        <div class="gh-step">
+          <div class="gh-num">4</div>
+          <div>
+            <h3>Enable GitHub Pages</h3>
+            <p>Go to your repo → click "Settings" → scroll to "Pages" in the left sidebar → under "Branch" select <code>main</code> → click "Save".</p>
+          </div>
+        </div>
+        <div class="gh-step">
+          <div class="gh-num">5</div>
+          <div>
+            <h3>🎉 Your site is live!</h3>
+            <p>Within ~60 seconds, your site will be at <code>https://yourusername.github.io/my-coding-guide</code>. Share it with everyone!</p>
+          </div>
+        </div>
+      </div>
+      <div class="card mt2" style="background: linear-gradient(135deg, var(--accent4), var(--accent2)); border: none; color: white; text-align: center;">
+        <div style="font-size:2rem; margin-bottom:0.5rem;">🚀</div>
+        <h3 style="color:white;">You're officially a web developer.</h3>
+        <p style="color:rgba(255,255,255,0.85);">A real page, on a real URL, made by you. That's not nothing — that's everything. Welcome to the community!</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with 💛 for curious beginners everywhere &nbsp;·&nbsp; <strong>CodeYourFuture</strong> &nbsp;·&nbsp; Free forever</p>
+    <p style="margin-top:0.5rem; font-size:0.82rem;">No gatekeeping. No cost. No prerequisites. Just you and your curiosity.</p>
+  </footer>
+
+  <script>
+    // ===== THEME TOGGLE =====
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.dataset.theme === "dark";
+      html.dataset.theme = isDark ? "light" : "dark";
+      localStorage.setItem("theme", html.dataset.theme);
+      document.getElementById("theme-icon").textContent = isDark ? "🌙" : "☀️";
+      document.getElementById("theme-label").textContent = isDark ? "Dark" : "Light";
+    }
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = savedTheme;
+    if (savedTheme === "dark") {
+      document.getElementById("theme-icon").textContent = "☀️";
+      document.getElementById("theme-label").textContent = "Light";
+    }
+
+    // ===== PROGRESS BAR =====
+    function updateProgress() {
+      const sections = ["tools","languages","playground","roadmap","projects","darkmode","quiz","mindset","github"];
+      let visited = JSON.parse(localStorage.getItem("visited") || "[]");
+      const pct = Math.round((visited.length / sections.length) * 100);
+      document.getElementById("main-progress").style.width = pct + "%";
+      document.getElementById("progress-label").textContent = pct + "% complete";
+    }
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.id;
+          if (id) {
+            let visited = JSON.parse(localStorage.getItem("visited") || "[]");
+            if (!visited.includes(id)) { visited.push(id); localStorage.setItem("visited", JSON.stringify(visited)); }
+            updateProgress();
+          }
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll("section[id]").forEach(s => sectionObserver.observe(s));
+    updateProgress();
+    setTimeout(() => { document.getElementById("main-progress").style.width = "0%"; }, 100);
+    setTimeout(updateProgress, 300);
+
+    // ===== SCROLL REVEAL =====
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+    // ===== LANGUAGE SWITCHER =====
+    function switchLang(lang) {
+      document.querySelectorAll(".lang-example").forEach(el => el.classList.remove("active"));
+      document.querySelectorAll(".lang-tab").forEach(el => el.classList.remove("active"));
+      document.getElementById("lang-" + lang).classList.add("active");
+      event.target.classList.add("active");
+    }
+
+    // ===== CODE PLAYGROUND =====
+    function runCode() {
+      const code = document.getElementById("code-editor").value;
+      const frame = document.getElementById("preview-frame");
+      frame.srcdoc = code;
+    }
+    runCode(); // Run on load
+
+    const snippets = {
+      rainbow: `<style>
+  body { font-family: sans-serif; text-align: center; padding: 40px; background: #111; }
+  h1 {
+    font-size: 3rem;
+    background: linear-gradient(90deg, red, orange, yellow, green, blue, violet);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shift 3s linear infinite;
+    background-size: 200%;
+  }
+  @keyframes shift { 0% { background-position: 0% } 100% { background-position: 200% } }
+</style>
+<h1>🌈 Rainbow Text!</h1>
+<p style="color:white;">CSS can do wild things!</p>`,
+
+      button: `<style>
+  body { display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; background:#f0f0f0; font-family:sans-serif; }
+  button {
+    padding: 16px 40px; font-size: 1.2rem; font-weight: bold;
+    background: linear-gradient(135deg, #ff8c00, #ff5f6d);
+    color: white; border: none; border-radius: 50px;
+    cursor: pointer; transition: all 0.2s;
+    box-shadow: 0 6px 20px rgba(255,100,0,0.4);
+  }
+  button:hover { transform: scale(1.07); box-shadow: 0 10px 28px rgba(255,100,0,0.5); }
+  button:active { transform: scale(0.97); }
+</style>
+<button onclick="this.textContent='🎉 You clicked it!'">Click me! 🔥</button>`,
+
+      card: `<style>
+  body { display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; background:#f0f4ff; font-family:sans-serif; }
+  .card { background:white; border-radius:20px; padding:2rem; text-align:center; width:260px; box-shadow:0 10px 40px rgba(0,0,0,0.12); }
+  .avatar { font-size:4rem; }
+  h2 { margin:0.5rem 0; color:#333; }
+  p { color:#888; font-size:0.9rem; }
+  .tag { display:inline-block; background:#f0f0ff; color:#6c63ff; padding:4px 12px; border-radius:50px; font-size:0.8rem; font-weight:bold; margin:3px; }
+</style>
+<div class="card">
+  <div class="avatar">👩‍💻</div>
+  <h2>Future Developer</h2>
+  <p>Coding enthusiast & problem solver</p>
+  <div>
+    <span class="tag">HTML</span>
+    <span class="tag">CSS</span>
+    <span class="tag">JS</span>
+  </div>
+</div>`,
+
+      counter: `<style>
+  body { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; margin:0; font-family:sans-serif; background:#1a1a2e; color:white; }
+  #count { font-size:6rem; font-weight:bold; color:#f7c948; line-height:1; }
+  .btns { display:flex; gap:1rem; margin-top:1.5rem; }
+  button { padding:12px 28px; font-size:1.2rem; border:none; border-radius:12px; cursor:pointer; font-weight:bold; transition:transform 0.1s; }
+  #minus { background:#ff5f6d; color:white; }
+  #plus { background:#43c59e; color:white; }
+  button:active { transform:scale(0.93); }
+</style>
+<div id="count">0</div>
+<div class="btns">
+  <button id="minus" onclick="change(-1)">−</button>
+  <button id="plus" onclick="change(1)">＋</button>
+</div>
+<script>
+  let n = 0;
+  function change(v) { n += v; document.getElementById('count').textContent = n; }
+<\/script>`,
+
+      reset: `<!-- ✏️ Edit me! -->
+<style>
+  body { font-family: sans-serif; padding: 20px; }
+  h1 { color: coral; }
+</style>
+
+<h1>Hello, World! 🌍</h1>
+<p>Change this text and click Run →</p>`
+    };
+
+    function loadSnippet(name) {
+      document.getElementById("code-editor").value = snippets[name];
+      runCode();
+    }
+
+    // ===== QUIZ =====
+    const questions = [
+      { q: "What does HTML stand for?", opts: ["HyperText Markup Language", "High-Tech Machine Language", "HyperText Modern Layout", "HyperTool Markup Logic"], correct: 0 },
+      { q: "Which language makes websites look pretty (colors, fonts, layout)?", opts: ["JavaScript", "Python", "CSS", "HTML"], correct: 2 },
+      { q: "What does a <p> tag create in HTML?", opts: ["A picture", "A paragraph", "A page break", "A purple header"], correct: 1 },
+      { q: "What is GitHub Pages used for?", opts: ["Hosting video games", "Hosting websites for free", "Writing Python code", "Drawing diagrams"], correct: 1 },
+      { q: "What's a great first project for beginners?", opts: ["A full social media app", "A 3D video game engine", "A personal profile card", "A blockchain"], correct: 2 },
+    ];
+
+    let qIdx = 0, score = 0, answered = false;
+
+    function loadQuestion() {
+      answered = false;
+      const q = questions[qIdx];
+      document.getElementById("quiz-q").textContent = q.q;
+      document.getElementById("quiz-num").textContent = qIdx + 1;
+      document.getElementById("quiz-score").textContent = score;
+      document.getElementById("quiz-feedback").textContent = "";
+      document.getElementById("quiz-next-btn").style.display = "none";
+      document.getElementById("quiz-restart-btn").style.display = "none";
+      const optsEl = document.getElementById("quiz-opts");
+      optsEl.innerHTML = "";
+      q.opts.forEach((opt, i) => {
+        const btn = document.createElement("button");
+        btn.className = "quiz-opt";
+        btn.textContent = opt;
+        btn.onclick = () => answer(i, btn);
+        optsEl.appendChild(btn);
+      });
+    }
+
+    function answer(i, btn) {
+      if (answered) return;
+      answered = true;
+      const correct = questions[qIdx].correct;
+      const allBtns = document.querySelectorAll(".quiz-opt");
+      allBtns.forEach(b => b.style.pointerEvents = "none");
+      if (i === correct) {
+        btn.classList.add("correct");
+        score++;
+        document.getElementById("quiz-feedback").textContent = "✅ Correct! Great job!";
+        document.getElementById("quiz-score").textContent = score;
+        launchConfetti();
+      } else {
+        btn.classList.add("wrong");
+        allBtns[correct].classList.add("correct");
+        document.getElementById("quiz-feedback").textContent = "❌ Not quite — but now you know!";
+      }
+      if (qIdx < questions.length - 1) {
+        document.getElementById("quiz-next-btn").style.display = "inline-flex";
+      } else {
+        document.getElementById("quiz-feedback").textContent += ` Final score: ${score}/${questions.length} 🎯`;
+        document.getElementById("quiz-restart-btn").style.display = "inline-flex";
+      }
+    }
+
+    function nextQuestion() {
+      qIdx++;
+      loadQuestion();
+    }
+
+    function restartQuiz() {
+      qIdx = 0; score = 0;
+      loadQuestion();
+    }
+
+    loadQuestion();
+
+    // ===== CONFETTI =====
+    function launchConfetti() {
+      const canvas = document.getElementById("confetti-canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const pieces = Array.from({length: 70}, () => ({
+        x: Math.random() * canvas.width,
+        y: -10,
+        r: Math.random() * 8 + 4,
+        c: `hsl(${Math.random()*360},80%,60%)`,
+        dx: (Math.random()-0.5)*4,
+        dy: Math.random()*4+2,
+        rot: Math.random()*360
+      }));
+      let frame;
+      function draw() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        pieces.forEach(p => {
+          ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
+          ctx.fillStyle = p.c; ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r); ctx.restore();
+          p.x += p.dx; p.y += p.dy; p.rot += 3;
+        });
+        if (pieces.some(p => p.y < canvas.height)) frame = requestAnimationFrame(draw);
+        else { ctx.clearRect(0,0,canvas.width,canvas.height); cancelAnimationFrame(frame); }
+      }
+      draw();
+    }
+  </script>
+</body>
+</html>
