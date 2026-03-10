@@ -74,21 +74,21 @@ Contributions are welcome.
 
 You can help by:
 
->Improving the design
+Improving the design
 
->Adding kid-friendly coding examples
+Adding kid-friendly coding examples
 
->Fixing bugs
+Fixing bugs
 
->Adding new interactive features
+Adding new interactive features
 
->Fork the repository
+Fork the repository
 
->Create a new branch
+Create a new branch
 
->Make your changes
+Make your changes
 
->Submit a pull request
+Submit a pull request
 
 📄 License
 
