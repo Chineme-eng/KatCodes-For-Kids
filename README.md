@@ -1,87 +1,95 @@
-# A Beginners Guide to Code 💻
+# KatCodes For Kids 👩‍💻🧒
 
-Welcome to **A Beginners Guide to Code**, your step-by-step roadmap to learning coding from scratch. This guide is perfect for **non-technical beginners, students, or aspiring founders** who want to get started coding today.  
+> A simple educational website designed to introduce kids to basic coding concepts in a fun and beginner-friendly way.
 
-It’s **free, approachable, and actionable**, helping you go from “What is coding?” to “I built my first project!” with practical advice and resources.
-
----
-
-## 🌟 Features
-
-- **Understand what coding is** in simple terms  
-- **Discover free beginner-friendly tools** like VS Code, Repl.it, freeCodeCamp, Scratch, and more  
-- **Try beginner projects** like a personal webpage, random quote generator, and a to-do list  
-- **Follow a universal roadmap** from HTML → JS → small projects → GitHub → APIs  
-- **Motivational tips** to build confidence and consistency  
+🌐 **Live Site:**  
+https://chineme-eng.github.io/KatCodes-For-Kids/
 
 ---
 
-## 🛠 Free Tools Highlight
+## 📸 Preview
 
-| Category | Tool | Link | Notes |
-|----------|------|------|-------|
-| Code Editor | VS Code | [vscode.dev](https://vscode.dev/) | Beginner-friendly, free |
-| Online Editor | Repl.it | [replit.com](https://replit.com/) | Run code in browser instantly |
-| Learning Platform | freeCodeCamp | [freecodecamp.org](https://www.freecodecamp.org/) | Interactive lessons and projects |
-| Fun Practice | Scratch | [scratch.mit.edu](https://scratch.mit.edu/) | Drag-and-drop beginner coding |
-| Version Control | GitHub | [github.com](https://github.com/) | Save and share your code |
-| Hosting | GitHub Pages | [pages.github.com](https://pages.github.com/) | Host your projects online for free |
+![KatCodes For Kids Screenshot](assets/screenshot.png)
 
 ---
 
-## 🏗 Beginner Project Ideas
+## 📚 About
 
-- Personal Webpage  
-- Simple Calculator  
-- Random Quote Generator  
-- To-Do List  
+**KatCodes For Kids** is a simple educational project built to help children and beginners understand what coding is and how websites work.
 
-> Each project is small, achievable, and a great way to practice coding fundamentals.
+The goal is to make programming feel **fun, approachable, and creative** while demonstrating how basic web technologies can be used to build real websites.
 
 ---
 
-## 📖 Beginner Roadmap
+## ✨ Features
 
-1. **HTML & CSS** → build your first webpage  
-2. **Basic JavaScript** → make your page interactive  
-3. **Mini Projects** → games, calculators, random generators  
-4. **Git & GitHub** → store and share your work  
-5. **APIs** → add external data to your projects  
-
-*(Roadmap is visual and interactive in the guide.)*
+- Beginner-friendly explanations of coding concepts  
+- Simple and clean design for easy learning  
+- Interactive elements using JavaScript  
+- Lightweight static website  
+- Hosted for free using GitHub Pages  
 
 ---
 
-## 🎯 Purpose
+## 🛠 Built With
 
-Coding can seem intimidating, especially for beginners. This guide **makes it clear, actionable, and approachable**, showing that anyone can start coding with the right resources and mindset.  
-
----
-
-## 📌 How to Use
-
-1. Open **index.html** in your browser or host via **GitHub Pages**  
-2. Follow the guide from “What is Coding?” onward  
-3. Click the tools, tips, and project links to start practicing immediately  
+- **HTML** – website structure  
+- **CSS** – styling and layout  
+- **JavaScript** – interactive features  
+- **GitHub Pages** – deployment and hosting  
 
 ---
 
-## ❤️ Contributing
+## 📂 Project Structure
 
-Contributions are welcome! You can:
+KatCodes-For-Kids/
+│
+├── index.html
+├── style.css
+├── script.js
+├── assets/
+│ └── screenshot.png
+└── README.md
 
-- Suggest additional beginner-friendly tools  
-- Add new beginner projects  
-- Improve copy, design, or interactivity  
-
-Submit a **pull request** or open an **issue** to contribute.  
-
----
-
-## 📄 License
-
-This project is **MIT Licensed** — free to use, share, and modify.  
 
 ---
 
-Made for **beginners, aspiring founders, and anyone curious about coding**.
+## 🚀 Running the Project Locally
+
+Clone the repository:
+
+```bash
+git clone https://github.com/chineme-eng/KatCodes-For-Kids.git
+cd KatCodes-For-Kids
+
+Then open index.html in your browser.
+
+🎯 Purpose
+
+This project was created to demonstrate how simple web technologies like HTML, CSS, and JavaScript can be used to build beginner-friendly educational tools for kids learning about coding.
+
+🤝 Contributing
+
+Contributions are welcome.
+
+You can help by:
+
+>Improving the design
+
+>Adding kid-friendly coding examples
+
+>Fixing bugs
+
+>Adding new interactive features
+
+>Fork the repository
+
+>Create a new branch
+
+>Make your changes
+
+>Submit a pull request
+
+📄 License
+
+This project is open-source and available under the MIT License.
