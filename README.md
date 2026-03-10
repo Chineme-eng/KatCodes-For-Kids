@@ -1,5 +1,13 @@
 # KatCodes For Kids 👩‍💻🧒
 
+
+![HTML5](https://img.shields.io/badge/HTML5-%23E34F26?style=flat\&logo=html5\&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-%231572B6?style=flat\&logo=css3\&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-%23F7DF1E?style=flat\&logo=javascript\&logoColor=black)
+![Mobile Friendly](https://img.shields.io/badge/Mobile-Friendly-4CAF50?style=flat)
+![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-181717?style=flat\&logo=github)
+![MIT License](https://img.shields.io/badge/License-MIT-blue?style=flat)
+
 > A simple educational website designed to introduce kids to basic coding concepts in a fun and beginner-friendly way.
 
 🌐 **Live Site:**  
