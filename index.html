@@ -437,6 +437,31 @@
       background: var(--bg3); padding: 0.15rem 0.5rem; border-radius: 6px;
       font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--accent2);
     }
+  /* ===== COPY BUTTON ===== */
+.code-block { position: relative; }
+.copy-btn {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  color: var(--code-text);
+  padding: 0.3rem 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+  opacity: 0;
+}
+.code-block:hover .copy-btn { opacity: 1; }
+.copy-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
   </style>
 </head>
 <body>
@@ -544,6 +569,8 @@
       </div>
       <div id="lang-html" class="lang-example active card">
         <p style="margin-bottom:0.8rem;font-weight:700;">🌐 HTML — The skeleton. It gives websites their shape!</p>
+        <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
         <pre><span class="code-comment">&lt;!-- This is an HTML comment --&gt;</span>
 <span class="code-kw">&lt;h1&gt;</span>Hello, World!<span class="code-kw">&lt;/h1&gt;</span>
 <span class="code-kw">&lt;p&gt;</span>I'm learning to code!<span class="code-kw">&lt;/p&gt;</span>
@@ -552,6 +579,8 @@
       </div>
       <div id="lang-css" class="lang-example card">
         <p style="margin-bottom:0.8rem;font-weight:700;">🎨 CSS — The paintbrush! It adds colors and cool designs.</p>
+        <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
         <pre><span class="code-comment">/* Change the page background color */</span>
 <span class="code-fn">body</span> {
   <span class="code-kw">background-color</span>: <span class="code-str">coral</span>;
@@ -566,6 +595,8 @@
       </div>
       <div id="lang-js" class="lang-example card">
         <p style="margin-bottom:0.8rem;font-weight:700;">⚡ JavaScript — The brain! It makes buttons click and games work.</p>
+        <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
         <pre><span class="code-comment">// Show a greeting</span>
 <span class="code-kw">let</span> name = <span class="code-str">"World"</span>;
 <span class="code-fn">console</span>.log(<span class="code-str">`Hello, ${name}!`</span>);
@@ -579,6 +610,8 @@
       </div>
       <div id="lang-python" class="lang-example card">
         <p style="margin-bottom:0.8rem;font-weight:700;">🐍 Python — Super easy to read. It looks almost like regular English!</p>
+        <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
         <pre><span class="code-comment"># Print a greeting</span>
 <span class="code-kw">print</span>(<span class="code-str">"Hello, World!"</span>)
 
@@ -591,6 +624,8 @@
       </div>
       <div id="lang-swift" class="lang-example card">
         <p style="margin-bottom:0.8rem;font-weight:700;">🍎 Swift — The language used to make iPad and iPhone games.</p>
+        <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
         <pre><span class="code-comment">// Swift - used for iOS apps</span>
 <span class="code-kw">import</span> Foundation
 
@@ -1177,6 +1212,14 @@
       }
       draw();
     }
+  // ===== COPY BUTTON =====
+function copyCode(btn) {
+  const text = btn.nextElementSibling.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy', 1800);
+  });
+}
   </script>
 </body>
 </html>
