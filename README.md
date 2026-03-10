@@ -79,13 +79,13 @@ Contributions are welcome.
 
 You can help by:
 
-Improving the design
+1. Improving the design
 
-Adding kid-friendly coding examples
+2. Adding kid-friendly coding examples
 
-Fixing bugs
+3. Fixing bugs
 
-Adding new interactive features
+4. Adding new interactive features
 
 Fork the repository
 
@@ -94,12 +94,3 @@ Create a new branch
 Make your changes
 
 Submit a pull request
-
-📄 License
-
-This project is open-source and available under the MIT License.
-Submit a pull request
-
-📄 License
-
-This project is open-source and available under the MIT License.
