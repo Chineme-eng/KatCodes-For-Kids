@@ -64,9 +64,6 @@ KatCodes-For-Kids/
 
 ## 🚀 Running the Project Locally
 
-Clone the repository:
-
-```bash
 git clone https://github.com/chineme-eng/KatCodes-For-Kids.git
 cd KatCodes-For-Kids
 
@@ -96,6 +93,11 @@ Create a new branch
 
 Make your changes
 
+Submit a pull request
+
+📄 License
+
+This project is open-source and available under the MIT License.
 Submit a pull request
 
 📄 License
